@@ -1,0 +1,122 @@
+/* Container styling */
+.form-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 25px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  background-color: #fafafa;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: Arial, sans-serif;
+}
+
+/* Heading */
+h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Title input */
+.title-input input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Content textarea */
+.content-input textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  resize: vertical;
+  min-height: 100px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+/* Mood buttons container */
+.mood-input {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* Mood buttons */
+.mood-input button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradient */
+  color: rgb(194, 155, 107);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 8px; /* space between emoji and text */
+}
+
+.mood-input button:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.15);
+}
+
+/* Highlight selected mood */
+.mood-input button.selected {
+  background-color: #28a745;
+}
+
+/* Optional: add spacing at the bottom */
+.form-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.mood-input button.selected {
+  background: linear-gradient(135deg, #43e97b, #38f9d7); /* Green gradient */
+  color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.submit-container button{
+  padding: 12px 140px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  background: linear-gradient(135deg, #f6d365, #fda085); /* Warm gradient */
+  color: #fff;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.submit-container {
+  display: flex;
+  justify-content: center; /* centers horizontally */
+  margin-top: 20px;        /* space from mood buttons */
+}
+
+.submit-container button:hover {
+  transform: translateY(-2px) scale(1.0000001);
+  box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+}
+
+.mood-input h2{
+    font-weight: 500;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    color :rgb(130, 234, 148)
+}

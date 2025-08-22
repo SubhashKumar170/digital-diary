@@ -5,6 +5,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import History from "./History";
 import Profile from './Profile';
 import New from './New';
+import Home from './Home';
 
 export default function App() {
   return (
@@ -12,7 +13,7 @@ export default function App() {
         <BrowserRouter>
           <Navbar/>
           <Routes>
-            <Route index element= {<></>}/>
+            <Route index Component={Home}/>
             <Route path='/history' Component={History}/>
             <Route path='profile' Component={Profile} />
             <Route path = '/new' Component={New}/>
