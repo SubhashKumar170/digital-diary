@@ -15,7 +15,8 @@ export default function New() {
     setContent(e.target.value);
   }
 
-  const handleFinish = () =>{
+  const handleFinish = (e) =>{
+      e.preventDefault();
       if (!title || !content || !mood) {
         alert("Please fill all fields and select a mood!");
       }
@@ -63,6 +64,13 @@ export default function New() {
               className={mood === 'happy' ? 'selected' : ''}
             >
               Happy
+            </button>
+
+            <button 
+              type='button' onClick={()=>{setMood('surprise')}}
+              className={mood === 'surprise' ? 'selected' : ''}
+            >
+              Surprised
             </button>
 
             <button 
