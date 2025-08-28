@@ -48,4 +48,53 @@ const getEntry = async (req, res) =>{
 
 }
 
-module.exports = { createEntry, getEntries, getEntry }
+const updateEntry = async (req, res) =>{
+
+    try{
+        const id = req.params.id
+        const{ title ,content } = req.body;
+
+        const updateFields = {};
+
+        if (title) updateFields.title = title;
+        if (content) updateFields.content = content;
+
+        if (Object.keys(updateFields).length === 0) {
+            return res.status(400).json({ message: "No valid fields provided for update" });
+        }
+
+        const updatedEntry = await Entry.findByIdAndUpdate(
+            id,
+            {$set:updateFields },
+            { new: true, runValidators: true }
+        );
+
+        if (!updatedEntry) {
+            return res.status(404).json({ message: "Entry not found" });
+        }
+
+        res.status(200).json(updatedEntry);
+    } catch (err){
+        console.log('error occured : ', err);
+        res.status(500).json({message: "server Error"})
+    }
+
+}
+
+const deleteEntry = async(req, res) =>{
+
+    try{
+        await Entry.findByIdAndDelete(req.params.id);
+        res.status(204).send();
+    } catch(err){
+        console.log('error occured: ', err);
+        if (err.name === "CastError") {
+            return res.status(404).json({ message: "Entry not found" });
+        }
+        res.status(500).json({message: "server error"})
+    }
+}
+
+
+ 
+module.exports = { createEntry, getEntries, getEntry, updateEntry, deleteEntry }

@@ -15,14 +15,34 @@ export default function New() {
     setContent(e.target.value);
   }
 
-  const handleFinish = (e) =>{
+  const handleFinish = async (e) =>{
       e.preventDefault();
       if (!title || !content || !mood) {
         alert("Please fill all fields and select a mood!");
+        return;
       }
       else{
-        alert('details saved succesfully');
+        const newEntry = {title, content, mood }
+
+        try{
+          const res = await fetch("http://localhost:5000/api/add-entry", {
+              method : "POST",
+              headers : {"content-type" : "application/json"},
+              body : JSON.stringify(newEntry)
+          });
+          
+          const data = await res.json();
+          console.log("New entry created:", data);
+
+          setTitle("");
+          setContent("");
+          setMood("");
+
+        } catch(err){
+            console.error("Error creating entry:", err);
+        }
       }
+
 
   }
 
@@ -67,8 +87,8 @@ export default function New() {
             </button>
 
             <button 
-              type='button' onClick={()=>{setMood('surprise')}}
-              className={mood === 'surprise' ? 'selected' : ''}
+              type='button' onClick={()=>{setMood('surprised')}}
+              className={mood === 'surprised' ? 'selected' : ''}
             >
               Surprised
             </button>
@@ -86,7 +106,7 @@ export default function New() {
               type="submit"
               onClick={handleFinish}
             >
-              ✅ Update
+              ✅ Save
             </button>
           </div>
 
