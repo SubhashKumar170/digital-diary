@@ -6,7 +6,7 @@ const createEntry = async (req, res) =>{
 
         const {title, content, mood, date} = req.body;
 
-        const newEntry = Entry({
+        const newEntry = new Entry({
             title, content, mood, date
         });
 
@@ -19,4 +19,33 @@ const createEntry = async (req, res) =>{
     }
 }
 
-module.exports = {createEntry}
+const getEntries = async (req, res) =>{
+    try{
+        const entries = await Entry.find();
+        res.status(200).json(entries);
+    } catch(err){
+        console.log('error occured : ', err);
+        res.status(500).json({message: "server error"});
+    }
+}
+
+const getEntry = async (req, res) =>{
+
+    try{
+        const entry = await Entry.findById(req.params.id);
+
+        if(!entry){
+            return res.status(404).json({message: "entry not found"});
+        }
+        res.status(200).json(entry);
+    } catch(err){
+        if (err.name === "CastError") {
+            return res.status(404).json({ message: "Entry not found" });
+        }
+        console.log('error occured : ', err);
+        res.status(500).json({message: "server error"})
+    }
+
+}
+
+module.exports = { createEntry, getEntries, getEntry }

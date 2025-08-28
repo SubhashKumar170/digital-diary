@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const entrySchema = new mongoose.Schema({
     title : {type : String, required : true},
     content : {type: String, required : true},
-    mood : {type : String, required: true, enum: ['happy', 'sad', 'neutral', 'excited', 'angry']},
+    mood : {type : String, required: true, enum: ['happy', 'sad', 'normal', 'surprised']},
     date : {type : Date, default: Date.now}, 
 }, {timestamps:true} );
 
