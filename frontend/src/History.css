@@ -1,0 +1,166 @@
+/* Container */
+.history-container {
+  padding: 2rem;
+  background: #f9f9f9;
+  min-height: 100vh;
+  font-family: sans-serif;
+}
+
+.history-container h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Entries list */
+.entries {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Animation */
+@keyframes fadeSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entry {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0; /* start hidden */
+  animation: fadeSlideUp 0.5s forwards; /* fade + slide up */
+}
+
+/* Date box */
+.date-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80px;
+  height: 100px;
+  background: #e0e0e0;
+  border-radius: 12px;
+  padding: 5px;
+  justify-content: space-between;
+}
+
+.inner-square {
+  width: 50px;
+  height: 50px;
+  background: #4caf50;
+  color: white;
+  font-weight: bold;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  margin-top: 5px;
+}
+
+.month-year {
+  text-align: center;
+  font-size: 0.85rem;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.month {
+  display: block;
+  font-weight: bold;
+}
+
+.year {
+  display: block;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+/* Title container with buttons */
+.title-container {
+  background: #fff;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between; /* title left, buttons right */
+}
+
+.title-container h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #222;
+}
+
+.buttons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+button {
+  padding: 0.4rem 0.8rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+button.edit {
+  background-color: #2196f3;
+  color: white;
+}
+
+button.edit:hover {
+  background-color: #1976d2;
+}
+
+button.delete {
+  background-color: #f44336;
+  color: white;
+}
+
+button.delete:hover {
+  background-color: #d32f2f;
+}
+
+button.view {
+  background-color: #4caf50;
+  color: white;
+}
+
+button.view:hover {
+  background-color: #388e3c;
+}
+
+.mood-container {
+    display: inline-block;
+    margin-right: 4rem;
+}
+
+.mood-container p {
+    margin: 0;
+    padding: 0.2rem 0.6rem;       /* better padding for text */
+    border-radius: 12px;           /* pill-shaped */
+    font-weight: bold;
+    font-size: 0.75rem;
+    text-transform: capitalize;
+    color: rgb(49, 47, 47);                  /* make text visible */
+    background-color: hsl(53, 79%, 71%);     /* default happy, will override per mood */
+    min-width: 50px;
+    text-align: center;
+    display: inline-block;
+}
+
+

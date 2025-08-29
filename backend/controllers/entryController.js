@@ -21,7 +21,7 @@ const createEntry = async (req, res) =>{
 
 const getEntries = async (req, res) =>{
     try{
-        const entries = await Entry.find();
+        const entries = await Entry.find().sort({ createdAt: -1 });;
         res.status(200).json(entries);
     } catch(err){
         console.log('error occured : ', err);
