@@ -1,0 +1,46 @@
+/* Container for each entry card */
+.entry-card {
+  background-color: #fff;
+  border: 1px solid #e4e4e4;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Hover effect like GFG */
+.entry-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+}
+
+
+
+/* Button styling like GFG buttons */
+.entry-card button {
+  margin-top: 10px;
+  padding: 6px 14px;
+  background-color: #2f8d46; /* GFG green */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.entry-card button:hover {
+  background-color: #256f38;
+}
+
+/* Details section */
+.entry-details {
+  margin-top: 12px;
+  padding: 10px;
+  border-left: 3px solid #2f8d46;
+  background: #f9f9f9;
+  font-size: 14px;
+  line-height: 1.5;
+}

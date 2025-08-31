@@ -32,10 +32,17 @@
 
 .entry {
   display: flex;
+  flex-direction: column; /* stack vertically */
+  gap: 0.5rem;
+  opacity: 0; 
+  animation: fadeSlideUp 0.5s forwards;
+}
+
+/* top row with date + title container */
+.entry-top {
+  display: flex;
   align-items: center;
   gap: 1rem;
-  opacity: 0; /* start hidden */
-  animation: fadeSlideUp 0.5s forwards; /* fade + slide up */
 }
 
 /* Date box */
@@ -92,7 +99,7 @@
   flex: 1;
   display: flex;
   align-items: center;
-  justify-content: space-between; /* title left, buttons right */
+  justify-content: space-between;
 }
 
 .title-container h2 {
@@ -121,7 +128,6 @@ button.edit {
   background-color: #2196f3;
   color: white;
 }
-
 button.edit:hover {
   background-color: #1976d2;
 }
@@ -130,7 +136,6 @@ button.delete {
   background-color: #f44336;
   color: white;
 }
-
 button.delete:hover {
   background-color: #d32f2f;
 }
@@ -139,28 +144,40 @@ button.view {
   background-color: #4caf50;
   color: white;
 }
-
 button.view:hover {
   background-color: #388e3c;
 }
 
 .mood-container {
-    display: inline-block;
-    margin-right: 4rem;
+  display: inline-block;
+  margin-right: 4rem;
 }
 
 .mood-container p {
-    margin: 0;
-    padding: 0.2rem 0.6rem;       /* better padding for text */
-    border-radius: 12px;           /* pill-shaped */
-    font-weight: bold;
-    font-size: 0.75rem;
-    text-transform: capitalize;
-    color: rgb(49, 47, 47);                  /* make text visible */
-    background-color: hsl(53, 79%, 71%);     /* default happy, will override per mood */
-    min-width: 50px;
-    text-align: center;
-    display: inline-block;
+  margin: 0;
+  padding: 0.2rem 0.6rem; 
+  border-radius: 12px; 
+  font-weight: bold;
+  font-size: 0.75rem;
+  text-transform: capitalize;
+  color: rgb(49, 47, 47);
+  background-color: hsl(53, 79%, 71%);
+  min-width: 50px;
+  text-align: center;
+  display: inline-block;
 }
 
+/* Smooth slide-down animation for ViewEntry */
+.viewHistory {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.4s ease;
+  opacity: 0;
+  padding: 0 1.5rem; /* match title-container horizontal padding */
+}
 
+.viewHistory.active {
+  max-height: 500px; /* adjust based on content */
+  opacity: 1;
+  padding: 1rem 1.5rem; /* add vertical padding when visible */
+}
