@@ -19,15 +19,35 @@ const createEntry = async (req, res) =>{
     }
 }
 
-const getEntries = async (req, res) =>{
-    try{
-        const entries = await Entry.find().sort({ createdAt: -1 });;
-        res.status(200).json(entries);
-    } catch(err){
-        console.log('error occured : ', err);
-        res.status(500).json({message: "server error"});
+const getEntries = async (req, res) => {
+  try {
+    const { year, month, mood } = req.query;
+    let filter = {};
+
+    if (year && month) {
+      const start = new Date(year, month - 1, 1);
+      const end = new Date(year, month, 0, 23, 59, 59);
+      filter.createdAt = { $gte: start, $lte: end };
+    } else if (year) {
+      const start = new Date(`${year}-01-01`);
+      const end = new Date(`${year}-12-31T23:59:59`);
+      filter.createdAt = { $gte: start, $lte: end };
+    } else if (month) {
+      const thisYear = new Date().getFullYear();
+      const start = new Date(thisYear, month - 1, 1);
+      const end = new Date(thisYear, month, 0, 23, 59, 59);
+      filter.createdAt = { $gte: start, $lte: end };
     }
-}
+
+    if (mood) filter.mood = mood;
+
+    const entries = await Entry.find(filter).sort({ createdAt: -1 });
+    res.json(entries);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 
 const getEntry = async (req, res) =>{
 
