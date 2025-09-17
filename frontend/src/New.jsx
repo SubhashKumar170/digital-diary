@@ -2,116 +2,80 @@ import React, { useState } from 'react'
 import './New.css'
 
 export default function New() {
-
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   const [mood, setMood] = useState('');
 
-  const updateTitle = (e) =>{
-    setTitle(e.target.value);
-  }
+  const handleFinish = async (e) => {
+    e.preventDefault();
+    if (!title || !content || !mood) {
+      alert("Please fill all fields and select a mood!");
+      return;
+    }
 
-  const updateContent = (e) =>{
-    setContent(e.target.value);
-  }
+    try {
+      const res = await fetch("http://localhost:5050/api/add-entry", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        credentials: 'include', // ✅ include cookie
+        body: JSON.stringify({ title, content, mood })
+      });
 
-  const handleFinish = async (e) =>{
-      e.preventDefault();
-      if (!title || !content || !mood) {
-        alert("Please fill all fields and select a mood!");
+      if (res.status === 401) {
+        window.location.href = '/login';
         return;
       }
-      else{
-        const newEntry = {title, content, mood }
 
-        try{
-          const res = await fetch("http://localhost:5000/api/add-entry", {
-              method : "POST",
-              headers : {"content-type" : "application/json"},
-              body : JSON.stringify(newEntry)
-          });
-          
-          const data = await res.json();
-          console.log("New entry created:", data);
+      const data = await res.json();
+      console.log("New entry created:", data);
 
-          setTitle("");
-          setContent("");
-          setMood("");
-
-        } catch(err){
-            console.error("Error creating entry:", err);
-        }
-      }
-
-
+      setTitle("");
+      setContent("");
+      setMood("");
+    } catch (err) {
+      console.error("Error creating entry:", err);
+    }
   }
 
   return (
-    <div>
-      <div className="form-container">
-        <h2>About today?</h2>
-        <form action="">
+    <div className="form-container">
+      <h2>About today?</h2>
+      <form onSubmit={handleFinish}>
+        <div className="title-input">
+          <input
+            type="text"
+            placeholder="Title"
+            value={title}
+            onChange={e => setTitle(e.target.value)}
+          />
+        </div>
 
-          <div className="title-input">
-            <input 
-              type="text" 
-              placeholder='title'
-              onChange={updateTitle}
-              value = {title}
-            />
-          </div>
-          
-          <div className="content-input">
-            <textarea
-              placeholder='todays experince'
-              onChange={updateContent}
-              value={content}
-            />
-          </div>
-          
-          <div className="mood-input">
+        <div className="content-input">
+          <textarea
+            placeholder="Today's experience"  // ✅ fixed single quote
+            value={content}
+            onChange={e => setContent(e.target.value)}
+          />
+        </div>
 
-            <h2>Mood: </h2>
-            <button 
-              type='button' onClick={()=>{setMood('normal')}}
-              className={mood === 'normal' ? 'selected' : ''}
+        <div className="mood-input">
+          <h2>Mood: </h2>
+          {['normal','happy','surprised','sad'].map(m => (
+            <button
+              key={m}
+              type='button'
+              onClick={() => setMood(m)}
+              className={mood === m ? 'selected' : ''}
             >
-              Normal
+              {m.charAt(0).toUpperCase()+m.slice(1)}
             </button>
+          ))}
+        </div>
 
-            <button 
-              type='button' onClick={()=>{setMood('happy')}}
-              className={mood === 'happy' ? 'selected' : ''}
-            >
-              Happy
-            </button>
-
-            <button 
-              type='button' onClick={()=>{setMood('surprised')}}
-              className={mood === 'surprised' ? 'selected' : ''}
-            >
-              Surprised
-            </button>
-
-            <button 
-              type='button' onClick={()=>{setMood('sad')}}
-              className={mood === 'sad' ? 'selected' : ''}
-            >
-              Sad
-            </button>
-          </div>
-          
-          <div className="submit-container">
-            <button 
-              type="submit"
-              onClick={handleFinish}
-            >
-              ✅ Save
-            </button>
-          </div>
-
-        </form>
-      </div>
+        <div className="submit-container">
+          <button type="submit">✅ Save</button>
+        </div>
+      </form>
     </div>
   )
 }

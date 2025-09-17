@@ -5,9 +5,12 @@ const createEntry = async (req, res) =>{
     try {
 
         const {title, content, mood, date} = req.body;
+        if (!req.user) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
 
         const newEntry = new Entry({
-            title, content, mood, date
+            title, content, mood, date, userId: req.user.id
         });
 
         await newEntry.save();
@@ -22,7 +25,7 @@ const createEntry = async (req, res) =>{
 const getEntries = async (req, res) => {
   try {
     const { year, month, mood } = req.query;
-    let filter = {};
+    let filter = {userId: req.user.id};
 
     if (year && month) {
       const start = new Date(year, month - 1, 1);

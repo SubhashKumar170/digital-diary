@@ -1,27 +1,54 @@
+/* Navbar container */
 .nav-bar {
-  max-width: 100vw;   /* use width instead of height units */
-  margin: 0 auto;    /* center horizontally */
+  max-width: 100vw;       /* full width */
+  margin: 0 auto;         /* center horizontally */
 }
 
+/* Navigation links container */
 .nav-bar nav {
   display: flex;
-  gap: 1.5rem;       /* spacing between links */
-  justify-content: space-evenly; /* center the links */
+  gap: 1.5rem;            /* spacing between links */
+  justify-content: space-evenly; /* distribute links evenly */
   align-items: center;
   padding: 1rem;
-  background-color: #f5f5f5; /* light background */
+  background-color: #f5f5f5;    /* light background */
   border-radius: 10px;
+  flex-wrap: wrap;         /* wrap links if screen is small */
 }
 
+/* Nav links */
 .nav-bar nav a {
   text-decoration: none;
   color: #333;
   font-weight: 500;
-  transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out, border-bottom 0.2s ease-in-out;
 }
 
+/* Active link style */
 .nav-bar nav a.active {
-  color: #007bff; /* highlight active link */
+  color: #007bff;          /* highlight active link */
   font-weight: 600;
-  border-bottom: 1px solid darkcyan;
+  border-bottom: 2px solid darkcyan;
+}
+
+/* Hover effect on links */
+.nav-bar nav a:hover {
+  color: #0056b3;
+  border-bottom: 1px solid #007bff;
+}
+
+/* Logout button inside nav */
+.nav-bar nav button {
+  padding: 0.3rem 0.8rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.nav-bar nav button:hover {
+  background-color: #0056b3;
 }

@@ -7,11 +7,12 @@ export default function EditEntry({ entry, onSave }) {
 
   const handleConfirm = async () => {
     try {
-      const res = await fetch(`http://localhost:5000/api/update/${entry._id}`, {
+      const res = await fetch(`http://localhost:5050/api/update/${entry._id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: 'include', // ✅ include cookie
         body: JSON.stringify({
           title: title || entry.title,     // keep old value if left empty
           content: content || entry.content,

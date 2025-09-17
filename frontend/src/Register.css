@@ -1,0 +1,81 @@
+/* src/Register.css - modern compact design */
+
+.register-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #150921, #d7dae0);
+  padding-top: 4rem;
+}
+
+.register-card {
+  background: #ffffff;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 340px;
+  text-align: center;
+}
+
+.register-title {
+  font-size: 1.4rem;
+  margin-bottom: 1.2rem;
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.register-input {
+  padding: 0.6rem 0.8rem;
+  border-radius: 0.5rem;
+  border: 1px solid #d1d5db;
+  font-size: 0.95rem;
+  color: #111827;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+
+.register-input:focus {
+  border-color: #869dcf;
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+}
+
+.register-button {
+  padding: 0.65rem 0.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #145657;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.register-button:hover {
+  background: #273c35;
+  transform: translateY(-1px);
+}
+
+.register-button:active {
+  transform: translateY(1px);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .register-card {
+    padding: 1rem;
+    max-width: 300px;
+  }
+
+  .register-title {
+    font-size: 1.2rem;
+  }
+}
